@@ -1,0 +1,12 @@
+.env
+private/
+data/
+media/
+backups/
+media-backups/
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.DS_Store
+runtime/

@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Watch Me Bro · My video studio</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="stylesheet" href="style.css"><link rel="stylesheet" href="highlights.css"><link rel="stylesheet" href="simple.css"><link rel="stylesheet" href="creative.css"><link rel="stylesheet" href="timeline.css">
+</head>
+<body>
+<aside>
+<a class="wordmark" href="./"><span class="mark">W.</span> WATCH ME BRO</a><div class="eyebrow">MY VIDEO STUDIO</div>
+<nav aria-label="Make a video">
+<a href="#videos"><span>1</span> My videos</a><a href="#highlights"><span>2</span> Find moments</a>
+<a href="#highlight-results"><span>3</span> Watch &amp; choose</a><a href="#editor"><span>4</span> Add my style</a>
+<a href="#queue"><span>5</span> Finished videos</a><a href="settings" id="open-settings">⚙ Grown-up settings</a>
+</nav>
+<div class="aside-bottom"><span class="dot"></span> Your studio<p>Your originals stay here. You choose what to share.</p><button id="logout" class="quiet">Lock my studio</button></div>
+</aside>
+<main>
+<header><div><span class="eyebrow">WATCH ME BRO / LET'S MAKE SOMETHING</span><h1>Your game.<br><em>Your best moments.</em></h1><p>Find the fun bits. Make them yours.<br>Save a video you are proud to share.</p></div><div class="stamp">PLAY IT.<br>MAKE IT.<span>YOU HAVE THE FINAL SAY</span></div></header>
+<div id="notice" role="status" aria-live="polite"></div>
+<section id="login-panel" class="panel"><h2>Welcome back!</h2><form id="login-form"><label>Studio password<input name="password" type="password" autocomplete="current-password" required></label><button>Open my studio →</button></form><p class="muted">Ask the person who set up your studio if you need the password.</p></section>
+<div id="workspace" hidden>
+<div class="stats"><div><span id="project-count">0</span><small>MY PROJECTS</small></div><div><span id="render-count">0</span><small>READY TO WATCH</small></div><div><span id="storage-free">—</span><small>SPACE LEFT</small></div><div><span class="green">YOURS</span><small>YOU CHOOSE WHAT TO SHARE</small></div></div>
+<section id="projects" class="panel compact-panel">
+<h2>My projects</h2><p class="muted">A project keeps your videos and edits together.</p><div id="project-list" class="project-list"></div>
+<details id="new-project"><summary>+ Start a new project</summary>
+<form id="project-form" class="row"><label class="grow">Project name<input name="title" placeholder="My awesome gaming clips" maxlength="160" required></label><label>What kind?<select name="mode"><option value="gaming">Gaming videos</option><option value="business">Business videos</option></select></label><label>Channel name<select name="brand"><option>Watch Me Bro</option><option>CloudMonkey</option><option>Geek247</option><option>PickItUp</option><option>Seunarain</option><option>Postlane</option><option>4 The Paws</option></select></label><button>Create project</button></form>
+</details></section>
+<section id="videos" class="panel">
+<div class="eyebrow">STEP 1 / MY VIDEOS</div><h2>Add your gameplay.</h2><p>Pick a recording from your device, or use a video you have already added.</p>
+<form id="upload-form"><label>Choose a video<input name="video" type="file" accept=".mp4,.mov,.mkv,.webm,.m4v" required></label><button>Add my video →</button><p class="muted">Up to 2 GB per video. Keep this page open while it uploads.</p><progress id="upload-progress" max="100" value="0" aria-label="Video upload progress" hidden></progress></form>
+<div id="source-list"></div><video id="source-preview" controls preload="metadata" hidden></video>
+</section>
+<section id="editor" class="panel">
+<div class="section-heading"><div><div class="eyebrow">STEP 4 / ADD MY STYLE</div><h2>Make it your video.</h2><p id="editor-title" class="muted">Choose a project to get started.</p></div></div>
+<div id="editor-body" hidden>
+<p id="edit-summary" class="edit-summary">Choose a moment above, then add your opening and ending.</p>
+<div class="row"><label>Video shape<select id="format"><option value="landscape">Wide · YouTube video</option><option value="vertical">Tall · YouTube Short</option></select></label><label>Game sound<select id="audio"><option value="original">Keep the game sound</option><option value="mute">No sound</option></select></label></div>
+<p class="muted">Trim each chosen clip and move its crop below. Your preview shows the framing; titles, artwork and music are added when you export.</p>
+<label>Video name<input id="export-title" placeholder="Give your video a name" maxlength="160"></label>
+<details id="edit-advanced"><summary>Trim clips or add captions</summary>
+<h3>My chosen clips <small>Start and finish times in seconds from the original video</small></h3><div id="cuts"></div><button id="add-cut" class="quiet">+ Add another clip</button>
+<h3>Captions <small>Seconds in the chosen gameplay, before the opening screen</small></h3><label>Caption text and times (advanced JSON)<textarea id="captions" rows="6" spellcheck="false">[]</textarea></label><p class="muted">Captions must be added by hand for now. Format: [{"start":0,"end":3,"text":"Your caption"}].</p>
+<div class="row"><button id="shorts" class="quiet">Make three practice clips</button></div><p class="muted">This divides a video into three parts. Use Find moments for AI picks.</p>
+</details>
+<div class="row make-actions"><button id="save-plan" class="quiet">Save my edit</button><button id="render">Make my video →</button></div>
+<p class="muted">Your finished video will appear below. Making a video here does not post it online.</p>
+</div><p id="editor-empty" class="muted">Choose a project above to get started.</p>
+</section>
+<section id="queue" class="panel"><div class="section-heading"><div><div class="eyebrow">STEP 5 / FINISHED VIDEOS</div><h2>Watch it. Save it. Enjoy it.</h2></div><button id="refresh" class="quiet">Check progress ↻</button></div><div id="jobs"></div></section>
+<section class="panel"><h2>AI connections</h2><p>Choose providers and spending limits on the <a href="settings">separate settings page</a>.</p></section>
+<details class="panel"><summary>Extra AI tool · write from timestamped notes</summary><section id="ai-editor"><div class="eyebrow">EXTRA TOOL / TEXT NOTES</div><h2>Make a catchy, truthful Short.</h2><p class="muted">This optional tool uses only the timestamped notes you paste here. To check the actual gameplay, use Find moments above.</p><label>Video<select id="transcript-source"><option value="">Choose a video</option></select></label><label>Timestamped notes (advanced JSON)<textarea id="transcript" rows="7" spellcheck="false">[]</textarea></label><p class="muted">Example: [{"start":12,"end":18,"text":"A visible goal"}].</p><button id="generate-storyboard">Suggest titles and moments from notes</button><div id="storyboard-results" aria-live="polite"></div></section>
+
+</details></div>
+<footer>WATCH ME BRO / MY VIDEO STUDIO <span>Your gameplay. Your story.</span></footer>
+</main><script src="app.js" defer></script><script src="highlights.js" defer></script><script src="creative.js" defer></script><script src="timeline.js" defer></script>
+</body></html>

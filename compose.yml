@@ -1,0 +1,47 @@
+name: watch-me-bro
+services:
+  studio:
+    build: .
+    image: watch-me-bro:local
+    container_name: watch-me-bro
+    restart: unless-stopped
+    init: true
+    user: '1000:1000'
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    mem_limit: 768m
+    cpus: 1.0
+    pids_limit: 128
+    ports:
+      - '${WMB_BIND_ADDRESS:-127.0.0.1}:${WMB_PORT:-8787}:8080'
+    environment:
+      WMB_BASE: /
+      WMB_DATA: /data
+      WMB_MEDIA: /media
+      WMB_AUTH: /run/secrets/admin-password
+      WMB_CRYPTO_KEY: /run/secrets/credential-encryption-key
+    volumes:
+      - type: bind
+        source: ${WMB_PRIVATE_DIR:-./private}/data
+        target: /data
+        bind: {create_host_path: false}
+      - type: bind
+        source: ${WMB_MEDIA_ROOT:-./media}
+        target: /media
+        bind: {create_host_path: false}
+      - type: bind
+        source: ${WMB_PRIVATE_DIR:-./private}/admin-password
+        target: /run/secrets/admin-password
+        read_only: true
+        bind: {create_host_path: false}
+      - type: bind
+        source: ${WMB_PRIVATE_DIR:-./private}/credential-encryption-key
+        target: /run/secrets/credential-encryption-key
+        read_only: true
+        bind: {create_host_path: false}
+    tmpfs:
+      - /tmp:size=64m,uid=1000,gid=1000,mode=1770
+    logging:
+      driver: json-file
+      options: {max-size: 10m, max-file: '3'}

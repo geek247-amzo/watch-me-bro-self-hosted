@@ -1,0 +1,16 @@
+.git
+runtime
+__pycache__
+tests
+*.md
+data
+media
+.env
+private
+backups
+media-backups
+.venv
+*.sqlite*
+*.mp4
+*.mkv
+*.mov
